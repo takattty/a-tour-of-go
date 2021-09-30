@@ -27,4 +27,19 @@ func main() {
 	default:
 		fmt.Println("Too far away.")
 	}
+
+	// 呼び出し元の関数（今回だとmain関数）の終わりまで、関数の実行を遅らせるステートメント
+	// なぜ使うのかはわかっていない。
+	defer fmt.Println("world")
+	fmt.Println("hello, ")
+
+	fmt.Println("counting")
+
+	// deferの呼び出し順はスタック構造で呼び出される。LIFO
+	// 本を積み上げて、上から取っていくイメージ
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
+	}
+
+	fmt.Println("done")
 }
