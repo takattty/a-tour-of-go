@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"runtime"
+	"time"
 )
 
 func main() {
@@ -14,5 +15,16 @@ func main() {
 		fmt.Println("Linu.")
 	default:
 		fmt.Printf("%s. \n", os)
+	}
+
+	fmt.Println("When's Saturday?")
+	today := time.Now().Weekday()
+	switch time.Saturday {
+	case today + 0:
+		fmt.Println("Today.")
+	case today + 1:
+		fmt.Println("Tomorrow")
+	default:
+		fmt.Println("Too far away.")
 	}
 }
