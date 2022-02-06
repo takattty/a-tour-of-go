@@ -19,6 +19,18 @@ func hoge() {
 	fmt.Println("hoge")
 }
 
+func adder() func(int) int {
+	// point1 このsum変数。こいつは参照される。
+	sum := 0
+	// point2 このリターンで返される関数もクロージャー。
+	// 自分の外にある変数sumを参照している。
+	// 参照した変数をアクセスして値を変える事が出来、バインドの様な動きをする。
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
 func main() {
 	// ポインタは値のメモリアドレスを指す
 	// つまり、値がメモリのどの位置にいるかの情報を指している。
@@ -121,8 +133,19 @@ func main() {
 	fmt.Println(value, check)
 
 	hoge()
+	// どうやらmain内では関数定義は出来ないらしく、↓の様に関数値にしてから使用している
 	huga := func() {
 		fmt.Println("huga")
 	}
 	huga()
+
+	// adderは関数を返しているから、pos+negは関数として扱われる。
+	// 今回大事なクロージャーは上の関数の中で理解する
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
 }
