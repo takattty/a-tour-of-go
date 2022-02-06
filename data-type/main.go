@@ -1,11 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // 構造体。型の異なるデータ型の変数を集めたデータ構造。
 // フィールド = 各変数
 type Vertex struct {
 	X, Y int
+}
+type Vertexs struct {
+	Lat, Long float64
+}
+
+var mv map[string]Vertexs
+
+func hoge() {
+	fmt.Println("hoge")
 }
 
 func main() {
@@ -90,4 +101,28 @@ func main() {
 
 	// _は要らない値を代入させる時に使うもの。
 	// for i, _ := range c と書くとindexだけ必要でvalueは要らないって事
+
+	// map
+	// key - value をマッピングするデータ構造
+	m := map[string]int{"x": 10, "y": 20}
+	fmt.Println(m)
+
+	// make関数は関数とか処理を行う場所以外で
+	// 最初に用意していた物を使って使用可能な状態にしたい時に使うのかな
+	mv = make(map[string]Vertexs)
+	mv["Bell"] = Vertexs{
+		40.68433, -74.39967,
+	}
+	fmt.Println(mv)
+
+	// mv[Bell]の引数は、valueとbool
+	value, check := mv["Bell"]
+	// {40.68433 -74.39967} true
+	fmt.Println(value, check)
+
+	hoge()
+	huga := func() {
+		fmt.Println("huga")
+	}
+	huga()
 }
